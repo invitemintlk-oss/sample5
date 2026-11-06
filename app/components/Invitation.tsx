@@ -103,7 +103,7 @@ export default function Invitation() {
         style={{
           zIndex: -1,
           backgroundColor: "#F4F1EC",
-          backgroundImage: "linear-gradient(rgba(251, 248, 241, 0.25), rgba(251, 248, 241, 0.25)), url(/eucalyptus-seal/backdrop-floral.webp)",
+          backgroundImage: "linear-gradient(rgba(251, 248, 241, 0.62), rgba(251, 248, 241, 0.62)), url(/eucalyptus-seal/backdrop-floral.webp)",
           backgroundSize: "cover",
           backgroundPosition: "center top",
         }}

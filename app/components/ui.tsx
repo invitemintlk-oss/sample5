@@ -19,8 +19,8 @@ export function Reveal({ y = 18, delay = 0, ...props }: HTMLMotionProps<"div"> &
 
 export function SectionTitle({ eyebrow, first, accent }: { eyebrow: string; first: string; accent: string }) {
   return (
-    <Reveal className="mb-12 text-center sm:mb-16">
-      <span className="mb-3 block text-[0.72rem] uppercase tracking-[0.34em]" style={{ fontFamily: F.sans, color: C.gold }}>
+    <Reveal className="mb-12 text-center sm:mb-16" style={{ textShadow: "0 0 14px rgba(251,248,241,1), 0 0 4px rgba(251,248,241,1)" }}>
+      <span className="mb-3 block text-[0.72rem] font-semibold uppercase tracking-[0.34em]" style={{ fontFamily: F.sans, color: "#A8842F" }}>
         {eyebrow}
       </span>
       <h2

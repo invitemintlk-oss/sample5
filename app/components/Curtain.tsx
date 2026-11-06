@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import { C, F, invitation as inv } from "../data";
 
 const shadow = "0 1px 10px rgba(255,253,248,0.9)";
-const goldBar = `linear-gradient(to bottom, ${C.gold}, ${C.goldLight}, ${C.gold})`;
 const ease = [0.65, 0, 0.35, 1] as const;
 
 export default function Curtain({ open, onOpen }: { open: boolean; onOpen: () => void }) {
@@ -49,7 +48,6 @@ export default function Curtain({ open, onOpen }: { open: boolean; onOpen: () =>
             exit={{ x: "-100%", scaleX: 0.6, transition: { duration: 1.4, ease } }}
           >
             <div className="absolute inset-0 opacity-50" style={{ background: "repeating-linear-gradient(90deg, transparent 0px, transparent 50px, rgba(120,95,50,0.08) 54px, transparent 62px)" }} />
-            <div className="absolute top-[72%] -right-2 h-24 w-4 -translate-y-1/2 rounded-full" style={{ background: goldBar }} />
           </motion.div>
 
           {/* right drape */}
@@ -62,7 +60,6 @@ export default function Curtain({ open, onOpen }: { open: boolean; onOpen: () =>
             exit={{ x: "100%", scaleX: 0.6, transition: { duration: 1.4, ease } }}
           >
             <div className="absolute inset-0 opacity-50" style={{ background: "repeating-linear-gradient(90deg, transparent 0px, transparent 50px, rgba(120,95,50,0.08) 54px, transparent 62px)" }} />
-            <div className="absolute top-[72%] -left-2 h-24 w-4 -translate-y-1/2 rounded-full" style={{ background: goldBar }} />
           </motion.div>
 
           {/* centre card */}
