@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Calendar, Heart, House, MailOpen, MapPin, Music, Phone, Shirt, Utensils, VolumeX } from "lucide-react";
+import { MapPin, Shirt, Utensils } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { C, F, invitation as inv } from "../data";
 import Countdown from "./Countdown";
@@ -49,29 +49,15 @@ function Initials({ amp }: { amp: string }) {
 
 export default function Invitation() {
   const [opened, setOpened] = useState(false);
-  const [playing, setPlaying] = useState(false);
   const [active, setActive] = useState("hero");
   const audio = useRef<HTMLAudioElement>(null);
 
   const open = () => {
     setOpened(true);
-    audio.current
-      ?.play()
-      .then(() => setPlaying(true))
-      .catch(() => setPlaying(false));
+    audio.current?.play().catch(() => {});
   };
 
-  const toggleMusic = () => {
-    const a = audio.current;
-    if (!a) return;
-    if (a.paused) a.play().then(() => setPlaying(true)).catch(() => {});
-    else {
-      a.pause();
-      setPlaying(false);
-    }
-  };
-
-  // highlight the nav link for the section in view
+    // highlight the nav link for the section in view
   useEffect(() => {
     const ids = [...NAV.map((n) => n.id), "dresscode", "countdown"];
     const obs = new IntersectionObserver(
@@ -93,7 +79,7 @@ export default function Invitation() {
 
   return (
     <div
-      className="relative min-h-screen w-full overflow-x-clip pb-[74px] sm:pb-0"
+      className="relative min-h-screen w-full overflow-x-clip"
       style={{
         backgroundColor: C.bg,
         color: C.ink,
@@ -408,16 +394,19 @@ export default function Invitation() {
               className="pointer-events-none absolute inset-3 sm:inset-5"
               style={{ borderRadius: "clamp(30px,7vw,78px) clamp(30px,7vw,78px) 20px 20px", border: "1px solid rgba(216,190,132,0.3)" }}
             />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/eucalyptus-seal/footer-floral.webp"
-              alt=""
-              aria-hidden="true"
-              draggable={false}
-              className="pointer-events-none absolute bottom-0 left-1/2 w-[min(122%,640px)] -translate-x-1/2 select-none"
-              style={{ opacity: 0.17 }}
-            />
             <div className="relative">
+              <div
+                className="mx-auto mb-8 w-[min(72%,280px)] overflow-hidden"
+                style={{ aspectRatio: "2 / 3", borderRadius: "200px 200px 16px 16px", border: "1px solid rgba(216,190,132,0.6)", boxShadow: "0 24px 48px -24px rgba(10,20,14,0.7)", padding: 6, background: "rgba(255,253,248,0.12)" }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/photos/save-the-date.webp"
+                  alt={`Illustration of ${inv.bride} and ${inv.groom}`}
+                  className="h-full w-full object-cover"
+                  style={{ borderRadius: "194px 194px 11px 11px" }}
+                />
+              </div>
               <div className="text-[0.9rem] uppercase tracking-[0.4em]" style={{ fontFamily: F.sans, opacity: 0.9 }}>
                 Save the date
               </div>
@@ -430,98 +419,13 @@ export default function Invitation() {
               <div style={{ fontFamily: F.deco, fontSize: "2rem", letterSpacing: "0.08em" }}>
                 <Initials amp={C.goldLight} />
               </div>
-              <div className="mb-7 mt-1" style={{ fontFamily: F.deco, fontSize: "1.3rem", letterSpacing: "0.06em", color: "rgba(246, 239, 221, 0.92)" }}>
+              <div className="mt-1" style={{ fontFamily: F.deco, fontSize: "1.3rem", letterSpacing: "0.06em", color: "rgba(246, 239, 221, 0.92)" }}>
                 {inv.bride} &amp; {inv.groom}
-              </div>
-              <div className="flex flex-nowrap items-center justify-center gap-3">
-                {inv.contacts.map((c) => (
-                  <a
-                    key={c.label}
-                    href={`tel:${c.phone}`}
-                    aria-label={`Call ${c.label}`}
-                    className="inline-flex items-center gap-2 whitespace-nowrap rounded-full px-4 py-2.5 text-[0.72rem] font-medium uppercase tracking-[0.13em] transition-transform duration-200 hover:-translate-y-0.5 active:scale-95 sm:px-6"
-                    style={{ fontFamily: F.sans, background: "rgba(255,253,248,0.12)", border: "1px solid rgba(216,190,132,0.6)", color: C.cream }}
-                  >
-                    <Phone className="h-3.5 w-3.5" style={{ color: C.goldLight }} aria-hidden /> Call {c.label}
-                  </a>
-                ))}
               </div>
             </div>
           </Reveal>
         </section>
       </div>
-
-      <div className="relative" style={{ zIndex: 2 }}>
-        <div className="px-4 py-7 text-center" style={{ background: C.green }}>
-          <p className="text-[0.7rem] tracking-wide" style={{ color: "rgba(246, 239, 221, 0.65)" }}>
-            Made with <Heart className="-mt-0.5 inline h-3 w-3" style={{ color: C.goldLight, fill: C.goldLight }} aria-hidden /> for {inv.bride} &amp; {inv.groom}
-          </p>
-        </div>
-      </div>
-
-      {/* music toggle */}
-      {opened && (
-        <motion.button
-          type="button"
-          onClick={toggleMusic}
-          aria-label={playing ? "Pause music" : "Play music"}
-          initial={{ opacity: 0, scale: 0.6 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 1.4 }}
-          className="fixed bottom-[92px] right-4 z-[400] grid h-11 w-11 place-items-center rounded-full sm:bottom-5 sm:right-5"
-          style={{ background: "linear-gradient(135deg,#587261,#3E5341)", color: C.cream, border: `1px solid ${C.goldLight}`, boxShadow: "0 12px 24px -10px rgba(47,65,55,0.7)" }}
-        >
-          {playing ? (
-            <motion.span animate={{ rotate: 360 }} transition={{ duration: 6, repeat: Infinity, ease: "linear" }}>
-              <Music className="h-5 w-5" strokeWidth={1.6} />
-            </motion.span>
-          ) : (
-            <VolumeX className="h-5 w-5" strokeWidth={1.6} />
-          )}
-        </motion.button>
-      )}
-
-      {/* mobile bottom nav */}
-      <nav
-        aria-label="Section navigation"
-        className="fixed inset-x-0 bottom-0 z-[500] grid items-end px-1.5 sm:hidden"
-        style={{
-          gridTemplateColumns: "repeat(5, minmax(0,1fr))",
-          paddingTop: 9,
-          paddingBottom: "calc(9px + env(safe-area-inset-bottom, 0px))",
-          background: "rgba(241, 231, 207, 0.92)",
-          backdropFilter: "blur(14px)",
-          borderTop: "1px solid rgba(199, 162, 75, 0.45)",
-          boxShadow: "0 -10px 30px -18px rgba(70,40,30,0.4)",
-        }}
-      >
-        {[
-          { id: "hero", label: "Home", Icon: House },
-          { id: "events", label: "Details", Icon: Calendar },
-          { id: "rsvp", label: "RSVP", Icon: MailOpen, center: true },
-          { id: "story", label: "Story", Icon: Heart },
-          { id: "venue", label: "Location", Icon: MapPin },
-        ].map(({ id, label, Icon, center }) => (
-          <a
-            key={id}
-            href={`#${id}`}
-            className="flex flex-col items-center gap-1 py-1 text-[0.56rem] font-medium uppercase tracking-[0.14em] transition-colors"
-            style={{ fontFamily: F.sans, color: active === id ? C.green : C.muted }}
-          >
-            {center ? (
-              <span
-                className="grid place-items-center rounded-full"
-                style={{ width: 54, height: 54, marginTop: -26, background: "linear-gradient(160deg,#587261,#3E5341)", color: C.cream, boxShadow: "0 12px 22px -10px rgba(47,65,55,0.8)", border: `3px solid ${C.bg}` }}
-              >
-                <Icon className="h-6 w-6" strokeWidth={1.4} aria-hidden />
-              </span>
-            ) : (
-              <Icon className="h-[22px] w-[22px]" strokeWidth={1.4} aria-hidden />
-            )}
-            <span>{label}</span>
-          </a>
-        ))}
-      </nav>
     </div>
   );
 }

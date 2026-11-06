@@ -57,8 +57,4 @@ export const invitation = {
     address: "Dadella, Galle 80000, Sri Lanka",
   },
 
-  contacts: [
-    { label: "Bride", phone: "+94712345678" },
-    { label: "Groom", phone: "+94759876543" },
-  ],
 };
