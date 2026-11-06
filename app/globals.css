@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+html {
+  scroll-padding-top: 72px;
+}
+
+body {
+  margin: 0;
+  background: #fbf8f1;
+}
+
+@keyframes lvPetalFall {
+  from { transform: translateY(-14vh); }
+  to { transform: translateY(116vh); }
+}
+@keyframes lvPetalSway {
+  from { transform: translateX(-11px) rotate(-28deg); }
+  to { transform: translateX(11px) rotate(28deg); }
+}
+@keyframes lvShine {
+  0% { left: -33%; }
+  60%, 100% { left: 133%; }
+}
+.lv-shine {
+  animation: lvShine 2.8s ease-in-out infinite;
+}
